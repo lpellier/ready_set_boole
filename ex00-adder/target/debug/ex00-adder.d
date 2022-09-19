@@ -1,0 +1,1 @@
+/mnt/nfs/homes/lpellier/Desktop/rncp-42/ready-set-boole/ex00-adder/target/debug/ex00-adder: /mnt/nfs/homes/lpellier/Desktop/rncp-42/ready-set-boole/ex00-adder/src/adder/adder.rs /mnt/nfs/homes/lpellier/Desktop/rncp-42/ready-set-boole/ex00-adder/src/adder/mod.rs /mnt/nfs/homes/lpellier/Desktop/rncp-42/ready-set-boole/ex00-adder/src/main.rs
