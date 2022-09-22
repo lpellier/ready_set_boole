@@ -1,0 +1,1 @@
+/home/lpellier/ready_set_boole/target/debug/ready_set_boole: /home/lpellier/ready_set_boole/src/main.rs /home/lpellier/ready_set_boole/src/operations/adder.rs /home/lpellier/ready_set_boole/src/operations/mod.rs /home/lpellier/ready_set_boole/src/operations/multiplier.rs
