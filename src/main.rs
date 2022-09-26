@@ -38,5 +38,7 @@ fn main() {
 	println!("{} (true)", evaluations::eval_formula::eval_formula("101|&"));
 	println!("{} (true)", evaluations::eval_formula::eval_formula("10|1&"));
 
-
+	// print truth table
+	println!("\nTruth Table");
+	evaluations::truth_table::print_truth_table("ABC&|!");
 }
