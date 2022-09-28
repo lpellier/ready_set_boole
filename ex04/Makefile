@@ -1,27 +1,23 @@
-NAME	=		ex00
+NAME	=		ex04
 
 SRCS	=		./main.cpp \
-				./adder.cpp
+				./eval_formula.cpp \
+				./truth_table.cpp
 
 OBJS		=	$(SRCS:.c=.o)
 
 CC			=	g++
 
-CFLAGS		=	-Wall -Wextra -Werror
-
-RM			=	rm -f
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
 $(NAME)		:	$(OBJS)
 				$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 all			:	$(NAME)
 
-clean		:
-				$(RM) $(OBJS)
-
-fclean		:	clean
-				$(RM) $(NAME)
+fclean		:	
+				rm -rf $(NAME)
 
 re			:	fclean all
 
-.PHONY		:	all clean fclean re bonus
+.PHONY		:	all fclean re bonus

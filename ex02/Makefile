@@ -1,7 +1,7 @@
-NAME	=		ex00
+NAME	=		ex02
 
 SRCS	=		./main.cpp \
-				./adder.cpp
+				./gray_code.cpp
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -9,19 +9,14 @@ CC			=	g++
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-RM			=	rm -f
-
 $(NAME)		:	$(OBJS)
 				$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 all			:	$(NAME)
 
-clean		:
-				$(RM) $(OBJS)
-
-fclean		:	clean
-				$(RM) $(NAME)
+fclean		:	
+				rm -rf $(NAME)
 
 re			:	fclean all
 
-.PHONY		:	all clean fclean re bonus
+.PHONY		:	all fclean re bonus

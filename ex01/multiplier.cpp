@@ -8,12 +8,12 @@
 	// ==, !=, <, >, <=, >=
 	// ++ just for iterating in loops
 
-use super::adder::adder;
+unsigned int adder(const unsigned int a, const unsigned int b);
 
-pub fn multiplier(a: u32, b: u32) -> u32 {
-	let mut i = 0;
-	let mut result = 0;
-	while i < b {
+unsigned int multiplier(const unsigned int a, const unsigned int b) {
+	unsigned int i = 0;
+	unsigned int result = 0;
+	while (i < b) {
 		result = adder(result, a);
 		i += 1;
 	}

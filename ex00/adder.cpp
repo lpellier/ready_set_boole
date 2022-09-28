@@ -8,13 +8,12 @@
 	// ==, !=, <, >, <=, >=
 	// ++ just for iterating in loops
 
-pub fn adder(a: u32, b: u32) -> u32 {
-	let result = a ^ b;
-	let carry = (a & b) << 1;
-	if carry == 0 {
+unsigned int adder(const unsigned int a, const unsigned int b) {
+	unsigned int result = a ^ b;
+	unsigned int carry = (a & b) << 1;
+
+	if (!carry)
 		return result;
-	}
-	else {
+	else
 		return adder(result, carry);
-	}
 }
