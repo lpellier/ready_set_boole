@@ -35,7 +35,6 @@ std::string	negation_normal_form(const std::string & formula) {
 	}
 	
 	std::string rf = formula;
-	unsigned int i = 0;
 	vars.clear();
 	operators.clear();
 
@@ -52,11 +51,20 @@ std::string	negation_normal_form(const std::string & formula) {
 			operators.push_back(rf[i]);
 		}
 		if (vars.size() == 3 && operators.size() == 2 && operators[0] == '|' && operators[1] == '&') {
-			std::string add = std::string(vars[2] + vars[0] + "&" + vars[2] + vars[1] + "|");
+			std::string add = std::string("");
+			add += vars[2];
+			add += vars[0];
+			add += "&";
+			add += vars[2];
+			add += vars[1];
+			add += "&";
+			add += "|";
 			// then add the rest of the formula
 			rf.erase(0, 5);
-
+			rf.insert(0, add);
 			// reparse every operand and operator and start again
+			vars.clear();
+			operators.clear();
 		}
 	}
 	
@@ -72,5 +80,5 @@ std::string	negation_normal_form(const std::string & formula) {
 
 	// material conditions
 	// AB> -> A!B|
-	return "something";
+	return rf;
 }
