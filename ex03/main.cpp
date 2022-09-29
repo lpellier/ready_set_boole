@@ -17,7 +17,6 @@ int main() {
 	std::cout << (eval_formula("10&&") == true ? "true" : "false") << " (error)" << std::endl;
 	std::cout << (eval_formula("1&") == true ? "true" : "false") << " (error)" << std::endl;
 
-	// ? need to revisit this case
 	std::cout << (eval_formula("00&1|") == true ? "true" : "false") << " (true)" << std::endl;
 
 

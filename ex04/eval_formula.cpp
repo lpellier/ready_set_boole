@@ -16,26 +16,32 @@
 bool _negation(const bool x) {
 	return !x;
 }
+// ? X!
 
 bool _and(const bool x, const bool y) {
 	return x && y;
 }
+// ? XY&
 
 bool _or(const bool x, const bool y) {
 	return x || y;
 }
+// ? XY|
 
 bool _xor(const bool x, const bool y) {
 	return _or(_and(x, _negation(y)), _and(_negation(x), y));
 }
+// ? XY!&X!Y&|
 
 bool _material_condition(const bool x, const bool y) {
 	return _or(_negation(x), y);
 }
+// ? X!Y|
 
 bool _logical_equivalence(const bool x, const bool y) {
 	return _or(_and(x, y), _and(_negation(x), _negation(y)));
 }
+// ? XY&X!Y!&|
 
 bool eval_formula(const std::string & formula) {
 	std::vector<bool> result = std::vector<bool>();
@@ -56,21 +62,20 @@ bool eval_formula(const std::string & formula) {
 		}
 	}
 
-	// for (std::vector<bool>::iterator )
-
 	if (result.size() == 0 || op_size != result.size() - 1) {
 		std::cout << "Error : not the right amount of operators or operands." << std::endl;
 		return false;
 	}
 
-	std::reverse(result.begin(), result.end());
 	for (std::string::iterator beg = operators.begin(); beg != operators.end(); beg++) {
 		if (result.size() == 1)
 			break;
 		if (*beg == '!')
 			result[0] = _negation(result[0]);
-		else if (*beg == '&')
+		else if (*beg == '&') {
 			result[0] = _and(result[0], result[1]);
+			result.erase(result.begin() + 1);
+		}
 		else if (*beg == '|') {
 			result[0] = _or(result[0], result[1]);
 			result.erase(result.begin() + 1);

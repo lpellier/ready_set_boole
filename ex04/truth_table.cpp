@@ -51,44 +51,6 @@ public:
 	}
 };
 
-// Function to print binary tree in 2D
-// It does reverse inorder traversal
-void print2DUtil(Node *root, int space)
-{
-    // Base case
-    if (root == NULL)
-        return;
- 
-    // Increase distance between levels
-    space += 10;
- 
-    // Process right child first
-    print2DUtil(root->right, space);
- 
-    // Print current node after space
-    // count
-    std::cout << std::endl;
-    for (int i = 10; i < space; i++) {
-        std::cout << " ";
-	}
-
-	if (root->value)
-    	std::cout << *(root->value);
-	else
-		std::cout << "root";
-	std::cout << std::endl;
- 
-    // Process left child
-    print2DUtil(root->left, space);
-}
- 
-// Wrapper over print2DUtil()
-void print2D(Node *root)
-{
-    // Pass initial space count as 0
-    print2DUtil(root, 0);
-}
-
 void replaceEvaluateFormula(std::vector<bool> path, const std::string & vars, std::string formula) {
 	unsigned int i = 0;
 	for (std::string::const_iterator beg = vars.begin(); beg != vars.end(); beg++) {
@@ -129,7 +91,7 @@ void print_truth_table(const std::string & formula) {
 		}
 		else if (*beg == '&' || *beg == '|' || *beg == '^' || *beg == '>' || *beg == '=')
 			operator_size += 1;
-		else {
+		else if (*beg != '!') {
 			std::cout << "Error : " << *beg << " is not a supported operator.";
 			return;
 		}
@@ -145,8 +107,6 @@ void print_truth_table(const std::string & formula) {
 		tree->add_layer();
 	}
 	std::cout << "| = |" << std::endl;
-		
-	// print2D(tree);
 	
 	std::vector<bool> path = std::vector<bool>();
 
