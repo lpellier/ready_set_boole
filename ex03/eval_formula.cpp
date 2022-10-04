@@ -41,13 +41,13 @@ bool _logical_equivalence(const bool x, const bool y) {
 class Node {
 public:
 	char	value;
-	bool	negation;
+	unsigned int	negation;
 	Node *	left;
 	Node *	right;
 
 	Node(char value) {
 		this->value = value;
-		this->negation = false;
+		this->negation = 0;
 		this->left = NULL;
 		this->right = NULL;
 	}
@@ -79,12 +79,11 @@ bool resolveTree(Node * cur) {
 		result = _logical_equivalence(resolveTree(cur->left), resolveTree(cur->right));
 	}
 
-	if (cur->negation) {
-		return !result;
+	while (cur->negation) {
+		result = !result;
+		cur->negation -= 1;
 	}
-	else {
-		return result;
-	}
+	return result;
 }
 
 bool eval_formula(const std::string & formula) {
@@ -125,7 +124,7 @@ bool eval_formula(const std::string & formula) {
 			node_stack.push(op_node);
 		}
 		else if (*it == '!') {
-			node_stack.top()->negation = true;
+			node_stack.top()->negation += 1;
 		}
 		else {
 			std::cout << "Error" << std::endl;
