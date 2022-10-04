@@ -53,40 +53,38 @@ public:
 	}
 };
 
-// Function to print binary tree in 2D
-// It does reverse inorder traversal
-void print2DUtil(Node* root, int space)
-{
-    // Base case
-    if (root == NULL)
-        return;
- 
-    // Increase distance between levels
-    space += 10;
- 
-    // Process right child first
-    print2DUtil(root->right, space);
- 
-    // Print current node after space
-    // count
-    std::cout << std::endl;
-    for (int i = 10; i < space; i++) {
-        std::cout << " ";
-	}
-	if (root->negation) {
-		std::cout << "!";
-	}
-    std::cout << root->value << std::endl;
- 
-    // Process left child
-    print2DUtil(root->left, space);
+void free_nodes(Node * cur) {
+	if (cur->left)
+		free_nodes(cur->left);
+	if (cur->right)
+		free_nodes(cur->right);
+	delete cur;
 }
- 
-// Wrapper over print2DUtil()
-void print2D(Node* root)
-{
-    // Pass initial space count as 0
-    print2DUtil(root, 0);
+
+bool resolveTree(Node * cur) {
+	bool result = cur->value - 48 != 0;
+	if (cur->value == '&') {
+		result = _and(resolveTree(cur->left), resolveTree(cur->right));
+	}
+	else if (cur->value == '|') {
+		result = _or(resolveTree(cur->left), resolveTree(cur->right));
+	}
+	else if (cur->value == '^') {
+		result = _xor(resolveTree(cur->left), resolveTree(cur->right));
+	}
+	else if (cur->value == '>') {
+		result = _material_condition(resolveTree(cur->left), resolveTree(cur->right));
+	}
+	else if (cur->value == '=') {
+		result = _logical_equivalence(resolveTree(cur->left), resolveTree(cur->right));
+	}
+
+	if (cur->negation) {
+		return !result;
+	}
+	else {
+		return result;
+	}
 }
 
 bool eval_formula(const std::string & formula) {
@@ -135,34 +133,12 @@ bool eval_formula(const std::string & formula) {
 		}
 	}
 
-	print2D(node_stack.top());
+	bool res = resolveTree(node_stack.top());
 
-	// for (std::string::iterator beg = operators.begin(); beg != operators.end(); beg++) {
-	// 	if (result.size() == 1)
-	// 		break;
-	// 	if (*beg == '!')
-	// 		result[0] = _negation(result[0]);
-	// 	else if (*beg == '&') {
-	// 		result[0] = _and(result[0], result[1]);
-	// 		result.erase(result.begin() + 1);
-	// 	}
-	// 	else if (*beg == '|') {
-	// 		result[0] = _or(result[0], result[1]);
-	// 		result.erase(result.begin() + 1);
-	// 	}
-	// 	else if (*beg == '^') {
-	// 		result[0] = _xor(result[0], result[1]);
-	// 		result.erase(result.begin() + 1);
-	// 	}
-	// 	else if (*beg == '>') {
-	// 		result[0] = _material_condition(result[0], result[1]);
-	// 		result.erase(result.begin() + 1);
-	// 	}
-	// 	else if (*beg == '=') {
-	// 		result[0] = _logical_equivalence(result[0], result[1]);
-	// 		result.erase(result.begin() + 1);
-	// 	}
-	// }
+	free_nodes(node_stack.top());
+	while (node_stack.size() > 0) {
+		node_stack.pop();
+	}
 
-	return result[0];
+	return res;
 }	

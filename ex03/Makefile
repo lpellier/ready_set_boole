@@ -7,7 +7,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 CC			=	g++
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
 $(NAME)		:	$(OBJS)
 				$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
