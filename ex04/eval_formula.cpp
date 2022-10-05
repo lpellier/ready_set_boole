@@ -128,7 +128,7 @@ bool eval_formula(const std::string & formula) {
 		}
 		else {
 			std::cout << "Error" << std::endl;
-			exit(1);
+			return (false);
 		}
 	}
 

@@ -8,6 +8,9 @@ int main() {
 	std::cout << negation_normal_form("AB|!") << std::endl;
 	std::cout << negation_normal_form("AB|C&") << std::endl;
 	std::cout << negation_normal_form("AB|C|D|") << std::endl;
+	std::cout << negation_normal_form("AB&C&D&") << std::endl;
+	std::cout << negation_normal_form("AB&!C!|") << std::endl;
+	std::cout << negation_normal_form("AB|!C!&") << std::endl;
 	// std::cout << negation_normal_form("AB>") << std::endl;
 	// std::cout << negation_normal_form("AB=") << std::endl;
 	// std::cout << negation_normal_form("AB|C&!") << std::endl;

@@ -1,36 +1,10 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-#include <stack>
-
+#include "ex06.hpp"
 // ? must recognize patterns : 
 // ? material condition, equivalence, elimination of double negation, de morgan's law, distributivity
 
 // ? first apply distributivity
 // ? then look for morgan's law, equivalence and material condition and translate
 // ? then look for double negations and eliminate them
-
-class Node {
-public:
-	char	value;
-	unsigned int	negation;
-	Node *	left;
-	Node *	right;
-
-	Node(char value) {
-		this->value = value;
-		this->negation = 0;
-		this->left = NULL;
-		this->right = NULL;
-	}
-
-	Node(const Node * src) {
-		this->value = src->value;
-		this->negation = src->negation;
-		this->left = src->left ? new Node(src->left) : NULL;
-		this->right = src->right ? new Node(src->right) : NULL;
-	}
-};
 
 void free_nodes(Node * cur) {
 	if (cur->left)
@@ -55,18 +29,18 @@ void rewriteTree(Node * cur) {
 			cur->negation = 1;
 	}
 	else if (cur->left && cur->right && cur->value == '=') {
-		Node * left_tmp = new Node(cur->left);
-		Node * right_tmp = new Node(cur->right);
+		Node * left_tmp = new Node(*cur->left);
+		Node * right_tmp = new Node(*cur->right);
 		
 		cur->value = '&';
 
 		cur->left = new Node('>');
-		cur->left->left = new Node(right_tmp);
-		cur->left->right = new Node(left_tmp);
+		cur->left->left = new Node(*right_tmp);
+		cur->left->right = new Node(*left_tmp);
 		
 		cur->right = new Node('>');
-		cur->right->left = new Node(left_tmp);
-		cur->right->right = new Node(right_tmp);
+		cur->right->left = new Node(*left_tmp);
+		cur->right->right = new Node(*right_tmp);
 		free_nodes(left_tmp);
 		free_nodes(right_tmp);
 	}
