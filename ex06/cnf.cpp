@@ -56,17 +56,41 @@ void rewriteTree2(Node * cur) {
 		free_nodes(tmp_right_right);
 	}
 
-	// if every operator is ! or & 
-		// -> move them to the top of the tree
-
-	// if every operator is ! or | 
-		// -> move them to the top of the tree
-
 
 	if (cur->left)
 		rewriteTree2(cur->left);
 	if (cur->right)
 		rewriteTree2(cur->right);
+}
+
+bool operatorsAndOnly(const std::string result) {
+	bool only_and = true;
+	for (std::string::const_iterator ite = result.begin(); ite != result.end(); ite++) {
+		if (*ite == '|')
+			only_and = false;
+	}
+	return only_and;
+}
+
+bool operatorsOrOnly(const std::string result) {
+	bool only_or = true;
+	for (std::string::const_iterator ite = result.begin(); ite != result.end(); ite++) {
+		if (*ite == '&')
+			only_or = false;
+	}
+	return only_or;
+}
+
+void moveOperatorsBack(std::string & res) {
+	std::string operators = std::string("");
+	std::string operands = std::string("");
+	for (std::string::const_iterator ite = res.begin(); ite != res.end(); ite++) {
+		if (*ite == '|' || *ite == '&')
+			operators.push_back(*ite);
+		else
+			operands.push_back(*ite);
+	}
+	res = operands + operators;
 }
 
 std::string	conjunction_normal_form(const std::string & formula) {
@@ -101,6 +125,12 @@ std::string	conjunction_normal_form(const std::string & formula) {
 
 	// ? read the tree -> result
 	std::string result = readTree(node_stack.top());
+
+	// if every operator is ! or &
+	if (operatorsAndOnly(result) || operatorsOrOnly(result)) {
+		// -> move them to the top of the tree
+		moveOperatorsBack(result);
+	}
 
 	free_nodes(node_stack.top());
 	while (node_stack.size() > 0) {
