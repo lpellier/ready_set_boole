@@ -10,13 +10,13 @@ void printTuple(std::tuple<unsigned short, unsigned short> a) {
 }
 
 int main() {
-	std::cout << map(25, 30) << " ";
+	std::cout << "(25, 30) -> " << map(25, 30) << " -> ";
 	printTuple(reverse_map(map(25, 30)));
-	std::cout << map(22254, 30845) << " ";
+	std::cout << "(22254, 30845) -> " << map(22254, 30845) << " -> ";
 	printTuple(reverse_map(map(22254, 30845)));
-	std::cout << map(0, 0) << " ";
+	std::cout << "(22254, 30845) -> " << map(0, 0) << " -> ";
 	printTuple(reverse_map(map(0, 0)));
-	std::cout << map(65535, 65535) << " ";
+	std::cout << "(65535, 65535) -> " << map(65535, 65535) << " -> ";
 	printTuple(reverse_map(map(65535, 65535)));
 
 	exit(0);

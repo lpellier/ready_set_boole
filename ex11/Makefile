@@ -8,7 +8,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 CC			=	g++
 
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra -Werror -g3 -std=c++17
 
 $(NAME)		:	$(OBJS)
 				$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
