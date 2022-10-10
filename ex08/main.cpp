@@ -17,24 +17,26 @@ void printVec(const std::vector<std::vector<int> > & set) {
 }
 
 int main() {
-	std::vector<int> set;
-	set.push_back(0);
-	set.push_back(1);
-	set.push_back(2);
-	
-	// {
-		// {}
-		// {0, 1, 2}
-		// {0}
-		// {1}
-		// {2}
-		// {0, 1}
-		// {0, 2}
-		// {1, 2}
-	// }
+	{
+		std::vector<int> set;
+		set.push_back(0);
+		set.push_back(1);
+		set.push_back(2);
+		
+		// {
+			// {}
+			// {0, 1, 2}
+			// {0}
+			// {1}
+			// {2}
+			// {0, 1}
+			// {0, 2}
+			// {1, 2}
+		// }
 
-	std::vector<std::vector<int> > result;
-	result = powerset(set);
-	printVec(result);
+		std::vector<std::vector<int> > result;
+		result = powerset(set);
+		printVec(result);
+	}
 	exit(0);
 }

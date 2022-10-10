@@ -54,11 +54,14 @@ public:
 };
 
 void free_nodes(Node * cur) {
+	if (!cur)
+		return ;
 	if (cur->left)
 		free_nodes(cur->left);
 	if (cur->right)
 		free_nodes(cur->right);
 	delete cur;
+	cur = NULL;
 }
 
 bool resolveTree(Node * cur) {

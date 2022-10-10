@@ -16,7 +16,7 @@ $(NAME)		:	$(OBJS)
 all			:	$(NAME)
 
 fclean		:	
-				rm -rf $(NAME)
+				rm -rf $(NAME) *.dSYM
 
 re			:	fclean all
 

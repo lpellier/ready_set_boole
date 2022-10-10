@@ -27,11 +27,14 @@ public:
 };
 
 void free_nodes(Node * cur) {
+	if (!cur)
+		return ;
 	if (cur->left)
 		free_nodes(cur->left);
 	if (cur->right)
 		free_nodes(cur->right);
 	delete cur;
+	cur = NULL;
 }
 
 void rewriteTree(Node * cur) {
@@ -54,10 +57,12 @@ void rewriteTree(Node * cur) {
 		
 		cur->value = '&';
 
+		free_nodes(cur->left);
 		cur->left = new Node('>');
 		cur->left->left = new Node(right_tmp);
 		cur->left->right = new Node(left_tmp);
 		
+		free_nodes(cur->right);
 		cur->right = new Node('>');
 		cur->right->left = new Node(left_tmp);
 		cur->right->right = new Node(right_tmp);
@@ -191,5 +196,6 @@ std::vector<int>	eval_set(const std::string & formula, std::vector<std::vector<i
 	rewriteTree(node_stack.top());
 
 	result = evaluateTree(node_stack.top());
+	free_nodes(node_stack.top());
 	return result;
 }

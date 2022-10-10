@@ -27,11 +27,15 @@ void rewriteTree2(Node * cur) {
 		cur->right->value = '|';
 
 		// ? may need to change left/right
-		cur->right->right = new Node(tmp_right); 
+		free_nodes(cur->right->right);
+		cur->right->right = new Node(tmp_right);
+		free_nodes(cur->right->left); 
 		cur->right->left = new Node(tmp_left_right);  
+		free_nodes(cur->left->right);
 		cur->left->right = new Node(tmp_right);
+		free_nodes(cur->left->left);
 		cur->left->left = new Node(tmp_left_left);
-
+	
 		free_nodes(tmp_right);
 		free_nodes(tmp_left_left);
 		free_nodes(tmp_left_right);
@@ -47,9 +51,13 @@ void rewriteTree2(Node * cur) {
 		cur->right->value = '|';
 
 		// ? may need to change left/right
+		free_nodes(cur->left->right);
 		cur->left->right = new Node(tmp_left); 
+		free_nodes(cur->left->left);
 		cur->left->left = new Node(tmp_right_right);  
+		free_nodes(cur->right->right);
 		cur->right->right = new Node(tmp_left);
+		free_nodes(cur->right->left);
 		cur->right->left = new Node(tmp_right_left);
 		free_nodes(tmp_left);
 		free_nodes(tmp_right_left);
@@ -133,9 +141,9 @@ std::string	conjunction_normal_form(const std::string & formula) {
 	}
 
 	free_nodes(node_stack.top());
-	while (node_stack.size() > 0) {
-		node_stack.pop();
-	}
+	// while (node_stack.size() > 0) {
+	// 	node_stack.pop();
+	// }
 
 	return result;
 }

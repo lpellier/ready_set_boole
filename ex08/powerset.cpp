@@ -10,7 +10,6 @@ unsigned int	pow(unsigned int n, unsigned int poww) {
 std::vector<std::vector<int> >	powerset(const std::vector<int> & set) {
 	std::vector<std::vector<int> > pwrset;
     unsigned int pow_set_size = pow(2, set.size());
-
  
     for (unsigned int counter = 0; counter < pow_set_size; counter++) {
 		std::vector<int> cur_set = std::vector<int>();
